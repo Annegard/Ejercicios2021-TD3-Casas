@@ -26,7 +26,7 @@ void app_main(void)
 
     while (1)
     {
-        //insert code here
+        //code
     }
 }
 
