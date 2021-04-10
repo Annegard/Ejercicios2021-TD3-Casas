@@ -5,7 +5,9 @@
     #include <freertos\FreeRTOS.h>
     #include <freertos\task.h>
     #include "driver/gpio.h"
-    
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <string.h>
     //definiciones
     #define ledROJO        GPIO_NUM_6  // GPIO conectado al LED
     #define ledAMARILLO    GPIO_NUM_7

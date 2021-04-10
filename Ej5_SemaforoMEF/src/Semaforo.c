@@ -77,7 +77,7 @@ void actualizarSemaforo()
         break;
         default:
         {
-            prinf("ya hiciste cagada");
+            printf("ya hiciste cagada");
             iniciarSemaforo();
         }
         break;
