@@ -66,6 +66,7 @@ void gpio_isr_handler()
     }
     else
     {
+        printf("hola lucas como andas?");
         printf("SALTO CUALQUIER COSA, O TAL VEZ LOS DOS, NI IDEA, LA CUESTION ES QUE CAGASTE\n");
     }
 }
