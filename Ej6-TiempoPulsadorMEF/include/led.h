@@ -3,7 +3,7 @@
 
     #include "../include/global.h"
 
-    void inicializarLed(gpio_int_type_t Led1, gpio_int_type_t Led2, gpio_int_type_t Led3);
-    void Secuencia(gpio_int_type_t Sentido);
+    void inicializarLed(int Led1, int Led2, int Led3);
+    void Secuencia(int Sentido);
     void ledOFF();
 #endif

@@ -1,14 +1,15 @@
 #include "../include/pulsador.h"
 #include "../include/global.h"
+#include "../include/led.h"
 
-void iniciarPulsador(gpio_int_type_t pulsador){
+void iniciarPulsador(int pulsador){
 
     gpio_pad_select_gpio(pulsador);
     gpio_set_direction(pulsador, GPIO_MODE_INPUT);
     gpio_set_pull_mode(pulsador,GPIO_PULLDOWN_ONLY);
 }
 
-void actualizarEstadoPulsador(gpio_int_type_t pulsador){
+void actualizarEstadoPulsador(int pulsador){
     static unsigned long Tiempo=0;
 
     switch (estadoPulsadorActual)

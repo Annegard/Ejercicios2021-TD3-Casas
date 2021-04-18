@@ -1,60 +1,57 @@
 #include "../include/led.h"
 #include "../include/global.h"
 
-static uint8_t LED1, LED2,LED3, contador=1;
+static uint8_t L1,L2,L3;
+int  Sentido=0;
 
-void inicializarLed(gpio_int_type_t Led1,gpio_int_type_t Led2,gpio_int_type_t Led3){
-    
-    LED1=Led2;
-    LED2=Led2;
-    LED3=Led2;
+void inicializarLed(int led1,int led2,int led3){
+    L1=led1; L2=led2;L3=led3;
 
-    gpio_pad_select_gpio(LED1);
-    gpio_set_direction(LED1, GPIO_MODE_DEF_OUTPUT);
+    gpio_pad_select_gpio(led1);
+    gpio_set_direction(led1, GPIO_MODE_DEF_OUTPUT);
 
-    gpio_pad_select_gpio(LED2);
-    gpio_set_direction(LED2, GPIO_MODE_DEF_OUTPUT);
+    gpio_pad_select_gpio(led2);
+    gpio_set_direction(led2, GPIO_MODE_DEF_OUTPUT);
 
-    gpio_pad_select_gpio(LED3);
-    gpio_set_direction(LED3, GPIO_MODE_DEF_OUTPUT);
+    gpio_pad_select_gpio(led3);
+    gpio_set_direction(led3, GPIO_MODE_DEF_OUTPUT);
 
     Secuencia(1);
 }
 
-void Secuencia(gpio_int_type_t pulsador)
+void Secuencia(int pulsador)
 {
-    static int Sentido=0;
+    static uint8_t contador=1;
 
     if (pulsador == BOTON_A || Sentido == BOTON_A)
     {
         Sentido = pulsador;
         contador--;
     }
-    else//DERECHA
-    {
-        Sentido==BOTON_B;
+    else{//DERECHA
+        Sentido = BOTON_B;
         contador++;
     }
-    
+
     switch (contador)
     {
     case 1:
-        gpio_set_level(LED1,1);
-        gpio_set_level(LED2,0);
-        gpio_set_level(LED3,0);
+        gpio_set_level(L1,1);
+        gpio_set_level(L2,0);
+        gpio_set_level(L3,0);
         if (Sentido==BOTON_A){//seteo del contador
             contador=3;
         }
         break;
     case 2:
-        gpio_set_level(LED1,0);
-        gpio_set_level(LED2,1);
-        gpio_set_level(LED3,0);
+        gpio_set_level(L1,0);
+        gpio_set_level(L2,1);
+        gpio_set_level(L3,0);
         break;
     case 3:
-        gpio_set_level(LED1,0);
-        gpio_set_level(LED2,0);
-        gpio_set_level(LED3,1);
+        gpio_set_level(L1,0);
+        gpio_set_level(L2,0);
+        gpio_set_level(L3,1);
         if (Sentido==BOTON_B){//seteo del contador
             contador=3;
         }

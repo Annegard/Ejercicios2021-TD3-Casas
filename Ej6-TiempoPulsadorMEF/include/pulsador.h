@@ -12,7 +12,7 @@
     //variable de estado (global)
     estadoPulsador_t estadoPulsadorActual;
     
-    void iniciarPulsador(gpio_int_type_t pulsador);
-    void actualizarEstadoPulsador(gpio_int_type_t pulsador);
+    void iniciarPulsador(int pulsador);
+    void actualizarEstadoPulsador(int pulsador);
 
 #endif 
