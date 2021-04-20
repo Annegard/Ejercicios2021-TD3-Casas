@@ -13,5 +13,6 @@
     #define BOTON_B GPIO_NUM_32
 
     #define retardo 5
-
+    
+    unsigned long millis();
 #endif
