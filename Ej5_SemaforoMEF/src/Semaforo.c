@@ -1,10 +1,20 @@
 #include "../include/Semaforo.h"
 
+//tipo de datos para la variable de estados
+typedef enum
+{
+    ROJO,
+    ROJO_AMARILLO,
+    VERDE,
+    AMARILLO
+}estadoMEF_t;
+//variable de estado (global)
+estadoMEF_t estadoActual;
+int contador;
+
 void iniciarSemaforo()
 {
-    gpio_set_direction(ledROJO,     GPIO_MODE_OUTPUT);
-    gpio_set_direction(ledAMARILLO, GPIO_MODE_OUTPUT);
-    gpio_set_direction(ledVERDE,    GPIO_MODE_OUTPUT);
+    setLed();
 
     contador=0;
     estadoActual = ROJO;
@@ -18,8 +28,7 @@ void actualizarSemaforo()
         {
             if (contador==0)
             {
-                apagarLed();//apagar todos los leds
-                gpio_set_level(ledROJO,     1);
+                prenderLed(ROJO);//rojo
             }
             if (contador == 60)//hasta pasados los 60 segundo no cambia de estado
             {
@@ -33,9 +42,7 @@ void actualizarSemaforo()
         {
             if (contador==0)
             {
-                apagarLed();//apagar todos los leds
-                gpio_set_level(ledROJO,     1);
-                gpio_set_level(ledAMARILLO, 1);
+                prenderLed(ROJO_AMARILLO);//rojo
             }
             if (contador == 5)//hasta pasados los 5 segundos no cambia de estado
             {
@@ -49,8 +56,7 @@ void actualizarSemaforo()
         {
             if (contador==0)
             {
-                apagarLed();//apagar todos los leds
-                gpio_set_level(ledVERDE,    1);
+                prenderLed(VERDE);//rojo
             }
             if (contador == 30)//hasta pasados los 60 segundo no cambia de estado
             {
@@ -64,8 +70,7 @@ void actualizarSemaforo()
         {
             if (contador==0)
             {
-                apagarLed();//apagar todos los leds
-                gpio_set_level(ledAMARILLO, 1);
+                prenderLed(AMARILLO);//rojo
             }
             if (contador == 10)//hasta pasados los 60 segundo no cambia de estado
             {
@@ -84,10 +89,3 @@ void actualizarSemaforo()
     }
 }
 
-//funcion que apaga todos los leds
-void apagarLed()
-{
-    gpio_set_level(ledROJO,     0);
-    gpio_set_level(ledAMARILLO, 0);
-    gpio_set_level(ledVERDE,    0);
-}
