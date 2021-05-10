@@ -31,8 +31,7 @@ void app_main()
     );
 
     // Gestion de errores
-	if(res == pdFAIL)
-	{
+	if(res == pdFAIL){
 		printf( "Error al crear la tarea.\r\n" );
 		while(true);					// si no pudo crear la tarea queda en un bucle infinito
 	}
