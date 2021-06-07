@@ -13,6 +13,8 @@
 
 void tareaB( void* taskParmPtr ); //Prototipo de la función de la tarea
 
+void LED_secuencia(bool ESTADO);
+
 SemaphoreHandle_t semaforo = NULL;
 
 void app_main()
@@ -53,14 +55,27 @@ void tareaB( void* taskParmPtr )
     while( true )
     {
         if(xSemaphoreTake(semaforo, RETARDO)==pdTRUE){
-            gpio_set_level( ROJO, 1 );
-            vTaskDelay( RETARDO );
-            gpio_set_level( ROJO, 0 );
+            LED_secuencia(true);
         }
         else{
-            gpio_set_level( VERDE, 1 );
-            vTaskDelay( RETARDO );
-            gpio_set_level( VERDE, 0 );
+            LED_secuencia(false);
         }
+    }
+}
+
+void LED_secuencia(bool ESTADO){
+
+    if(ESTADO)
+    {
+        gpio_set_level( ROJO, 1 );
+        vTaskDelay( RETARDO );
+        gpio_set_level( ROJO, 0 );
+        vTaskDelay( RETARDO );
+    }
+    else{
+        gpio_set_level( VERDE, 1 );
+        vTaskDelay( RETARDO );
+        gpio_set_level( VERDE, 0 );
+        vTaskDelay( RETARDO );
     }
 }
