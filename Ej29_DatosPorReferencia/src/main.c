@@ -55,15 +55,21 @@ void tareaDestello( void* taskParmPtr )
 
     SEND_DATA* DatosRecibidos;
 
+
+    TickType_t diferencia_auxiliar=0;
+    uint8_t indice_auxiliar = 0;
+
     // ---------- Bucle infinito --------------------------
     while( true )
     {
         if(xQueueReceive( cola , &DatosRecibidos,  0 )) //recibo dato desde la cola sin tiempo de espera
         {
+            diferencia_auxiliar = DatosRecibidos -> diferenciaTiempo;
+            indice_auxiliar = DatosRecibidos -> LED_indice;
             //acá se recibió
-            if( (DatosRecibidos -> diferenciaTiempo) > xPeriodicity )
+            if(  diferencia_auxiliar > xPeriodicity )
             {
-                (DatosRecibidos -> diferenciaTiempo) = xPeriodicity;
+                diferencia_auxiliar = xPeriodicity;
             }
         }
         else
@@ -71,9 +77,9 @@ void tareaDestello( void* taskParmPtr )
             //acá no se recibió
         }
          
-        gpio_set_level( led[(DatosRecibidos -> LED_indice)], 1 );
-        vTaskDelay( DatosRecibidos -> diferenciaTiempo );
-        gpio_set_level( led[(DatosRecibidos -> LED_indice)], 0 );
+        gpio_set_level( led[indice_auxiliar], 1 );
+        vTaskDelay( diferencia_auxiliar );
+        gpio_set_level( led[indice_auxiliar], 0 );
 
         vTaskDelayUntil( &xLastWakeTime , xPeriodicity );
     }

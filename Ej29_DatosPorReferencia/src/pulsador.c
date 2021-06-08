@@ -41,7 +41,7 @@ void inicializarPulsador( void )
     pulsadorA.tiempoAlto        = TIEMPO_NO_VALIDO;
 
     DatosAEnviar.diferenciaTiempo  = TIEMPO_NO_VALIDO;
-    DatosAEnviar.LED_indice = 1;
+    DatosAEnviar.LED_indice = 0;
 
     cola = xQueueCreate( 1 , sizeof(SEND_DATA*) ); // Creación de la cola
 
