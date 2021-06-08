@@ -123,14 +123,14 @@ static void botonPresionado( uint8_t  indice)
     pulsadorA.tiempoBajo = conteoTicksActuales;             //guardamos ese tiempo como referencia
 }
 
+SEND_DATA* punteroEstado = &DatosAEnviar;
+
 /* accion de el evento de tecla liberada */
 static void botonLiberado( uint8_t  indice)
 {
     TickType_t conteoTicksActuales = xTaskGetTickCount();   //Medimos el tiempo en ticks desde que inició el scheduler
     pulsadorA.tiempoAlto    = conteoTicksActuales;
     DatosAEnviar.diferenciaTiempo  = pulsadorA.tiempoAlto - pulsadorA.tiempoBajo; //Da el tiempo que el pulsador estuvo en estado alto
-
-    SEND_DATA* punteroEstado = &DatosAEnviar;
 
     xQueueSend( cola , &punteroEstado,  portMAX_DELAY  ); // Envío dato a la la cola
 }

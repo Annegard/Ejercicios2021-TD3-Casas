@@ -31,7 +31,7 @@ typedef struct
 
 typedef struct{
     TickType_t diferenciaTiempo;	    //variables
-    gpio_int_type_t LED_indice;
+    uint8_t LED_indice;
 }SEND_DATA;
 
 QueueHandle_t cola;
